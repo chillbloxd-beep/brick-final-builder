@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Brick Classroom Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Brick Classroom Dashboard</h1>
+    <p>Cloudflare Worker + D1 history + dashboard-controlled Chrome agent.</p>
+  </div>
+  <div id="status" class="pill">Offline</div>
+</header>
+
+<nav class="tabs-nav">
+  <button data-view="liveView" class="nav-active">Live</button>
+  <button data-view="tabsView">Tabs</button>
+  <button data-view="rulesView">Rules</button>
+  <button data-view="historyView">History</button>
+  <button data-view="debugView">Debug</button>
+</nav>
+
+<main>
+  <section id="liveView" class="view active">
+    <div class="grid">
+      <section class="card wide">
+        <h2>Connection</h2>
+        <div class="controls">
+          <button id="connectBtn">Connect Dashboard</button>
+          <button id="presenceBtn" class="secondary">Refresh Presence</button>
+          <button id="disconnectBtn" class="danger">Disconnect</button>
+        </div>
+        <div id="peers" class="meta">No peers yet.</div>
+      </section>
+
+      <section class="card video-card">
+        <h2>Live Preview</h2>
+        <div class="controls">
+          <button id="startLiveBtn">Start Live</button>
+          <button id="stopLiveBtn" class="danger">Stop Live</button>
+          <button id="resetLiveBtn" class="secondary">Reset Live Feed</button>
+          <button id="hardReconnectBtn" class="danger">Hard Reconnect</button>
+          <button id="captureOnceBtn" class="secondary">Capture Once</button>
+        </div>
+        <img id="liveImage" class="live" hidden>
+        <div id="liveMeta" class="meta">No frame yet.</div>
+      </section>
+
+      <section class="card">
+        <h2>Quick Controls</h2>
+        <div class="controls vertical">
+          <button data-cmd="PING">Ping Agent</button>
+          <button data-cmd="GET_TABS">Get Tabs</button>
+          <button data-cmd="FOCUS_ON">Focus On</button>
+          <button data-cmd="FOCUS_OFF">Focus Off</button>
+          <button data-cmd="LOCK" class="danger">Lock Browsing</button>
+          <button data-cmd="UNLOCK">Unlock Browsing</button>
+          <button data-cmd="CLOSE_OFFTASK" class="danger">Close Off-task Tabs</button>
+        </div>
+        <label>Open URL</label>
+        <div class="inline"><input id="openUrl" placeholder="wikipedia.org"><button id="openUrlBtn">Open</button></div>
+        <label>Send Message</label>
+        <div class="inline"><input id="messageText" placeholder="Please return to the task."><button id="messageBtn">Send</button></div>
+      </section>
+    </div>
+  </section>
+
+  <section id="tabsView" class="view">
+    <section class="card wide">
+      <h2>All Open Tabs</h2>
+      <div class="controls">
+        <button id="refreshTabsBtn" class="secondary">Refresh Tabs</button>
+        <button id="autoTabsBtn">Auto Tabs: Off</button>
+      </div>
+      <div id="tabsSummary" class="meta">No tab data yet.</div>
+      <div id="tabsPanel"></div>
+    </section>
+  </section>
+
+  <section id="rulesView" class="view">
+    <section class="card wide">
+      <h2>Web Rules</h2>
+      <div class="three">
+        <div>
+          <label>Allow Domains</label>
+          <textarea id="allowDomains"></textarea>
+        </div>
+        <div>
+          <label>Block Domains</label>
+          <textarea id="blockDomains"></textarea>
+        </div>
+        <div>
+          <label>Block Keywords</label>
+          <textarea id="blockKeywords"></textarea>
+        </div>
+      </div>
+      <div class="two">
+        <div>
+          <label>Alert Keywords</label>
+          <textarea id="alertKeywords"></textarea>
+        </div>
+        <div>
+          <label>Tab Limit</label>
+          <input id="tabLimit" type="number" min="0">
+          <label><input id="applyFocus" type="checkbox"> Turn focus mode on after applying</label>
+          <label><input id="applyLock" type="checkbox"> Turn lock mode on after applying</label>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="applyRulesBtn">Apply Rules</button>
+        <button id="resetRulesBtn" class="secondary">Reset Default Rules</button>
+      </div>
+    </section>
+  </section>
+
+  <section id="historyView" class="view">
+    <section class="card wide">
+      <h2>D1 History</h2>
+      <p class="muted">History is stored in Cloudflare D1 and auto-deletes after 60 days.</p>
+      <div class="filters">
+        <input id="historyDevice" placeholder="Device ID filter">
+        <input id="historyEvent" placeholder="Event type filter">
+        <input id="historySearch" placeholder="Search title/url/event">
+        <button id="refreshHistoryBtn">Refresh History</button>
+        <button id="cleanupBtn" class="danger">Cleanup >60 Days Now</button>
+        <button id="exportCsvBtn" class="secondary">Export CSV</button>
+      </div>
+      <div id="historySummary" class="meta">No history loaded yet.</div>
+      <div class="table-wrap">
+        <table id="historyTable">
+          <thead>
+            <tr>
+              <th>Time</th><th>Device</th><th>Event</th><th>Title</th><th>URL</th><th>Command</th><th>Status</th><th>Source</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <section id="debugView" class="view">
+    <section class="card wide">
+      <h2>Debug Log</h2>
+      <pre id="debugLog"></pre>
+    </section>
+  </section>
+</main>
+
+<script type="module" src="dashboard.js"></script>
+</body>
+</html>

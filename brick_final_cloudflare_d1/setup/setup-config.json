@@ -1,0 +1,49 @@
+{
+  "cloudflare": {
+    "workerBaseUrl": "https://brick-classroom-d1.lumjayvian.workers.dev",
+    "roomId": "brick-room-001",
+    "apiKey": "ZER0PING5GWIFI$$qwerty"
+  },
+  "dashboard": {
+    "autoConnect": true,
+    "autoRefreshTabs": true,
+    "tabRefreshMs": 2500,
+    "historyLimit": 150
+  },
+  "live": {
+    "defaultFps": 2,
+    "jpegQuality": 45
+  },
+  "rules": {
+    "allowDomains": [
+      "google.com",
+      "docs.google.com",
+      "classroom.google.com",
+      "wikipedia.org",
+      "khanacademy.org"
+    ],
+    "blockDomains": [
+      "youtube.com",
+      "discord.com",
+      "roblox.com",
+      "crazygames.com",
+      "tiktok.com"
+    ],
+    "blockKeywords": [
+      "proxy",
+      "vpn",
+      "games",
+      "casino",
+      "cheat"
+    ],
+    "alertKeywords": [
+      "proxy",
+      "vpn",
+      "game",
+      "cheat",
+      "discord",
+      "roblox"
+    ],
+    "tabLimit": 0
+  }
+}

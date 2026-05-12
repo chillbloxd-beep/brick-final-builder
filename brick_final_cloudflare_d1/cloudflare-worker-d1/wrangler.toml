@@ -1,0 +1,26 @@
+name = "brick-classroom-d1"
+main = "src/index.js"
+compatibility_date = "2026-05-01"
+
+[vars]
+# Use one strong secret. It is used by dashboard + extension for websocket/API auth.
+BRICK_API_KEY = "CHANGE_ME_TO_A_LONG_RANDOM_SECRET"
+
+[triggers]
+# Daily cleanup, UTC midnight. Deletes history older than HISTORY_RETENTION_DAYS.
+crons = ["0 0 * * *"]
+
+[[durable_objects.bindings]]
+name = "ROOMS"
+class_name = "Room"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Room"]
+
+# 1. Run: npx wrangler d1 create brick_history
+# 2. Paste the generated database_id below.
+[[d1_databases]]
+binding = "DB"
+database_name = "brick_history"
+database_id = "PASTE_D1_DATABASE_ID_HERE"

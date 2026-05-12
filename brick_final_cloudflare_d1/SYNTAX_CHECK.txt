@@ -1,0 +1,7 @@
+cloudflare-worker-d1/src/index.js: OK 
+extension/background.js: OK 
+extension/config.js: OK 
+extension/content.js: OK 
+dashboard-github-pages/dashboard.js: OK 
+dashboard-github-pages/config.js: OK 
+setup/build.js: OK 

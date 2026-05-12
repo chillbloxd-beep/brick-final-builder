@@ -1,0 +1,25 @@
+#brick-class-msg {
+  position: fixed;
+  right: 18px;
+  top: 18px;
+  z-index: 2147483647;
+  width: min(360px, calc(100vw - 36px));
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 22px 70px rgba(0,0,0,.25);
+  font-family: Inter, Arial, sans-serif;
+}
+#brick-class-msg p {
+  margin: 8px 0 12px;
+  line-height: 1.4;
+}
+#brick-class-msg button {
+  border: 0;
+  background: #111827;
+  color: white;
+  border-radius: 12px;
+  padding: 8px 11px;
+}
